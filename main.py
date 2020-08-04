@@ -1,6 +1,6 @@
 import sys,os
 import curses
-
+from player.player import Player
 
 def draw_ui(stdscr):
     k = 0
@@ -25,17 +25,25 @@ def draw_ui(stdscr):
     main_window.refresh()
     command_window.refresh()
 
+    # Instantiate player object
+
+    marvin = Player("marvin",1,1,1,1,5,5)
+
     while k != 'q':
         main_window.erase()
         command_window.erase()
         if k == "KEY_DOWN":
             cursor_y = cursor_y + 1
+            marvin.move(0,1)
         elif k == "KEY_UP":
             cursor_y = cursor_y - 1
+            marvin.move(0,-1)
         elif k == "KEY_LEFT":
             cursor_x = cursor_x - 1
+            marvin.move(-1,0)
         elif k == "KEY_RIGHT":
             cursor_x = cursor_x + 1
+            marvin.move(1,0)
 
         cursor_x = max(0, cursor_x)
         cursor_x = min(mw_width-1, cursor_x)
@@ -44,6 +52,10 @@ def draw_ui(stdscr):
         cursor_y = min(mw_height-1, cursor_y)
 
         # Declaration of strings
+
+        player_y, player_x = marvin.get_loc()
+
+        main_window.addstr(player_y, player_x, "@", curses.color_pair(1))
 
         title = "An Example"[:width-1]
         subtitle = "A subtitle"[:width-1]
