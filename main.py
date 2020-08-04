@@ -1,9 +1,10 @@
 import sys,os
 import curses
 from player.player import Player
+from interface.key_input import key_input
 
 def draw_ui(stdscr):
-    k = 0
+    key = 0
     cursor_x = 1
     cursor_y = 1
 
@@ -29,21 +30,11 @@ def draw_ui(stdscr):
 
     marvin = Player("marvin",1,1,1,1,5,5)
 
-    while k != 'q':
+    while key != 'q':
         main_window.erase()
         command_window.erase()
-        if k == "KEY_DOWN":
-            cursor_y = cursor_y + 1
-            marvin.move(0,1)
-        elif k == "KEY_UP":
-            cursor_y = cursor_y - 1
-            marvin.move(0,-1)
-        elif k == "KEY_LEFT":
-            cursor_x = cursor_x - 1
-            marvin.move(-1,0)
-        elif k == "KEY_RIGHT":
-            cursor_x = cursor_x + 1
-            marvin.move(1,0)
+
+        key_input(key, marvin)
 
         cursor_x = max(0, cursor_x)
         cursor_x = min(mw_width-1, cursor_x)
@@ -59,9 +50,9 @@ def draw_ui(stdscr):
 
         title = "An Example"[:width-1]
         subtitle = "A subtitle"[:width-1]
-        keystr = "Last Key pressed: {}".format(k)[:width-1]
+        keystr = "Last Key pressed: {}".format(key)[:width-1]
         statusbarstr = "Press 'q' to exit | STATUS BAR | Pos: {}, {}".format(cursor_x, cursor_y)
-        if k == 0:
+        if key == 0:
             keystr = "No key press detected..."[:width-1]
 
         string1 = "main window"[:width-1]
@@ -76,7 +67,7 @@ def draw_ui(stdscr):
         main_window.refresh()
         command_window.refresh()
 
-        k = stdscr.getkey()
+        key = stdscr.getkey()
 
 
 def main():
