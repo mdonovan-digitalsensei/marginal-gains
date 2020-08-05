@@ -28,6 +28,8 @@ class Player:
         self.my_icon = "@"
         self.y = x
         self.x = y
+        self.max_x = 5
+        self.max_y = 5
 
     def return_name(self):
         return self.my_name
@@ -81,9 +83,24 @@ class Player:
         self.my_weapon_name = li[self.return_weapon_idx()][1]
         self.my_weapon_dmg = int(li[self.return_weapon_idx()][2])
 
-    def move(self,x,y):
-        self.x += x
-        self.y += y
+    def move(self, y, x):
+        if self.x + x < 1:
+            self.x = 1
+        elif self.x + x > self.max_x - 1:
+            self.x = self.max_x - 1
+        else:
+            self.x += x
+
+        if self.y + y < 2:
+            self.y = 2
+        elif self.y + y > self.max_y - 1:
+            self.y = self.max_y - 1
+        else:
+            self.y += y
+
+    def set_max_yx(self, y, x):
+        self.max_y = y
+        self.max_x = x
 
     def get_loc(self):
         return self.y, self.x

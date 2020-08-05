@@ -13,7 +13,7 @@ def draw_ui(stdscr):
     main_window = curses.newwin(height, width)
     command_window = main_window.subwin(5, width, height - 5, 0)
 
-    mw_height, mw_width = main_window.getmaxyx()
+
 
     curses.noecho()
 
@@ -34,6 +34,8 @@ def draw_ui(stdscr):
         main_window.erase()
         command_window.erase()
 
+        mw_height, mw_width = main_window.getmaxyx()
+        marvin.set_max_yx(mw_height, mw_width)
         key_input(key, marvin)
 
         cursor_x = max(0, cursor_x)
