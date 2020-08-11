@@ -1,32 +1,26 @@
-import sys, os
 import curses
-from player.player import Player
-from interface.key_input import key_input
-from interface.mapper import Mapper
+import sys, os
 
+class Game_Controller:
+    def __init__(self, stdscr):
+        height, width = stdscr.getmaxyx()
+        main_window = curses.newwin(height, width)
+        command_window = main_window.subwin(5, width, height - 5, 0)
+        curses.noecho()
+        curses.start_color()
+        curses.init_pair(1, curses.COLOR_CYAN, curses.COLOR_BLACK)
+        curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
+        curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_WHITE)
 
-def draw_ui(stdscr):
-    key = 0
-    cursor_x = 1
-    cursor_y = 1
+    def render_ui(self):
+        self.stdscr.refresh()
+        self.main_window.refresh()
+        self.command_window.refresh()
 
-    height, width = stdscr.getmaxyx()
-
-    main_window = curses.newwin(height, width)
-    command_window = main_window.subwin(5, width, height - 5, 0)
-
-    curses.noecho()
-
-    curses.start_color()
-    curses.init_pair(1, curses.COLOR_CYAN, curses.COLOR_BLACK)
-    curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
-    curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_WHITE)
-
-    stdscr.refresh()
-    main_window.refresh()
-    command_window.refresh()
-
-    # Instantiate player object
+        # Instantiate player object
+    def erase_ui(self):
+        self.main_window.erase()
+        self.
 
     marvin = Player("marvin", 1, 1, 1, 1, 5, 5)
 
@@ -66,11 +60,3 @@ def draw_ui(stdscr):
         command_window.refresh()
 
         key = stdscr.getkey()
-
-
-def main():
-    curses.wrapper(draw_ui)
-
-
-if __name__ == "__main__":
-    main()

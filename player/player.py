@@ -105,19 +105,19 @@ class Player:
     def get_loc(self):
         return self.y, self.x
 
-#    def move(self, x, y, entities, map_array):
-#        test_x = self.x + x
-#        test_y = self.y + y
-#        for entity in entities:
-#            if entity[0] == test_x and entity[1] == test_y:
-#                return entity[3]
-#        if map_array[test_y - 1][test_x] == "x":
-#            return "x"
-#        if map_array[test_y - 1][test_x] == "s":
-#            return "s"
-#
-#        self.x += x
-#        self.y += y
+    #    def move(self, x, y, entities, map_array):
+    #        test_x = self.x + x
+    #        test_y = self.y + y
+    #        for entity in entities:
+    #            if entity[0] == test_x and entity[1] == test_y:
+    #                return entity[3]
+    #        if map_array[test_y - 1][test_x] == "x":
+    #            return "x"
+    #        if map_array[test_y - 1][test_x] == "s":
+    #            return "s"
+    #
+    #        self.x += x
+    #        self.y += y
 
     def scan(self):
         pass

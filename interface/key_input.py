@@ -1,5 +1,5 @@
 import curses
-import sys,os
+import sys, os
 
 
 def key_input(thekey, marvin):
